@@ -1,7 +1,16 @@
-<div class="container">
-  <app-site-header></app-site-header>
+<div class="container ">
   <section class="todoapp">
-    <input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">
+    <app-site-header></app-site-header>
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <input class="new-todo ng-pristine ng-valid ng-touched" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <app-site-footer></app-site-footer>
+      </div>
+    </div>
   </section>
-  <app-site-footer></app-site-footer>
+
 </div>
