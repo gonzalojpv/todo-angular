@@ -1,0 +1,7 @@
+<div class="container">
+  <app-site-header></app-site-header>
+  <section class="todoapp">
+    <input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">
+  </section>
+  <app-site-footer></app-site-footer>
+</div>
