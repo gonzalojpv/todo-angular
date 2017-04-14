@@ -8,14 +8,12 @@ export class TaskService {
 
   lastId: number = 0;
   tasks: Task[] = [];
-  heroesUrl: string = '';
+  heroesUrl: string = 'http://apisilex.proof.code/tasks/';
   headers: Headers =  new Headers({
     'auth':'jinto d0763edaa9d9bd2a9516280e9044d885'
   });
 
-  constructor( private http: Http ) {
-    this.heroesUrl = 'http://apisilex.proof.code/tasks/';
-  }
+  constructor( private http: Http ) { }
 
   create( task: Task ): Promise<Task> {
 
@@ -25,17 +23,25 @@ export class TaskService {
     let params: URLSearchParams = this.serialize(task);
 
     return this.http
-               .post(this.heroesUrl, params, options )
-               .toPromise()
-               .then(response => response.json() as Task)
-               .catch(this.handleError);
+      .post(this.heroesUrl, params, options )
+      .toPromise()
+      .then(response => response.json() as Task)
+      .catch(this.handleError);
   }
 
   getTasks(): Promise<Task[]> {
     return this.http.get(this.heroesUrl, { 'headers': this.headers} )
-               .toPromise()
-               .then(response => response.json() as  Task[])
-               .catch(this.handleError);
+      .toPromise()
+      .then(response => response.json() as  Task[])
+      .catch(this.handleError);
+  }
+
+  delete( id: number ): Promise<void> {
+    const url = `${this.heroesUrl}${id}`;
+    return this.http.delete( url, { headers: this.headers } )
+      .toPromise()
+      .then( res => res.json() as Task )
+      .catch( this.handleError );
   }
 
   private handleError(error: any): Promise<any> {

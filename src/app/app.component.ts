@@ -26,12 +26,20 @@ export class AppComponent {
 
   }
 
-  toggleTodoComplete( todo ) {
+  toggleTodoComplete() {
     console.log('toggleTodoComplete');
+
   }
 
-  removeTodo( todo ) {
+  removeTodo( todo: Task ): void {
     console.log('removeTodo');
+    this.taskService
+      .delete( todo.id )
+      .then( () => {
+        this.todos = this.todos.filter( h => h !== todo );
+        if ( this.newTask === todo )
+          this.newTask = null;
+      } );
   }
 
   getTasks(): void {
