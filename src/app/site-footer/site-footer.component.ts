@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-site-footer',
   template: `
-    <p>
-      site-footer Works!
-    </p>
+    <footer class="text-center">
+    <p>Semantic Weapons 2017</p>
+    </footer>
   `,
   styles: []
 })

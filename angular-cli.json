@@ -19,6 +19,10 @@
       "prefix": "app",
       "styles": [
         "styles.scss",
+        "assets/styles/variables.scss",
+        "assets/styles/global.scss",
+        "assets/styles/todomvc-common.css",
+        "assets/styles/todomvc-app.css",
         "../bower_components/bootstrap/dist/css/bootstrap.css"
       ],
       "scripts": [],
