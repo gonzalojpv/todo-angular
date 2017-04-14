@@ -3,14 +3,32 @@
     <app-site-header></app-site-header>
     <div class="row">
       <div class="col-sm-12 text-center">
-        <input class="new-todo ng-pristine ng-valid ng-touched" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">
+        <button (click)="getTasks()">Save</button>
+        <input class="new-todo ng-pristine ng-valid ng-touched" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTask.title" (keyup.enter)="addTodo()">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <section class="main" *ngIf="todos.length > 0">
+          <ul class="todo-list">
+            <li *ngFor="let todo of todos">
+              <div class="view">
+
+                <label>{{todo.title}}</label>
+                <button class="destroy" (click)="removeTodo(todo)"></button>
+              </div>
+            </li>
+          </ul>
+        </section>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12">
         <app-site-footer></app-site-footer>
+        <div *ngIf="todos.length > 0">
+          <span class="todo-count"><strong>{{todos.length}}</strong> {{todos.length == 1 ? 'item' : 'items'}} left</span>
+        </div>
       </div>
     </div>
   </section>
-
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Task } from './task';
 import { TaskService } from './task.service'
 
@@ -11,14 +11,35 @@ import { TaskService } from './task.service'
 export class AppComponent {
   title = 'app works!';
   newTask: Task = new Task();
+  todos: Task[];
 
   constructor( private taskDataService: TaskService ) {
-
+    this.todos = [];
   }
 
   addTodo() {
-    console.log('Here');
     this.taskDataService.addTask( this.newTask );
     this.newTask = new Task();
   }
+
+  toggleTodoComplete( todo ) {
+    console.log('toggleTodoComplete');
+  }
+
+  removeTodo( todo ) {
+    console.log('removeTodo');
+  }
+
+  getTasks(): void {
+    this.taskDataService
+        .getTasks()
+        .then(todos => {
+          this.todos = todos;
+        });
+  }
+
+  ngOnInit(): void {
+    this.getTasks();
+  }
+
 }

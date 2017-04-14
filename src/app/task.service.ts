@@ -7,27 +7,39 @@ import 'rxjs/add/operator/toPromise';
 export class TaskService {
 
   lastId: number = 0;
-  task: Task[] = [];
+  tasks: Task[] = [];
   heroesUrl: string = '';
+  headers: Headers =  new Headers({
+    'auth':'jinto d0763edaa9d9bd2a9516280e9044d885',
+  });
 
   constructor( private http: Http ) {
-    this.heroesUrl = 'http://apisilex.proof.code/messages/1';
+    this.heroesUrl = 'http://apisilex.proof.code/tasks/';
   }
 
   addTask( task: Task ): TaskService {
 
-    let headers = new Headers({
-      'auth':'jinto d0763edaa9d9bd2a9516280e9044d885',
-    });
-    let options = new RequestOptions({ headers: headers });
+    let options = new RequestOptions({ headers: this.headers });
     let body = JSON.stringify(task);
 
     //this.http.post(this.heroesUrl, body, options ).toPromise().then(response => response.json() );
     this.http.get(this.heroesUrl, {
-      'headers': headers
+      'headers': this.headers
     } ).toPromise().then(response => response.json() );
 
     return this;
+  }
+
+  getTasks(): Promise<Task[]> {
+    return this.http.get(this.heroesUrl, { 'headers': this.headers} )
+               .toPromise()
+               .then(response => response.json() as  Task[])
+               .catch(this.handleError);
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
   }
 
 }
