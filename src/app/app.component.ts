@@ -11,15 +11,19 @@ import { TaskService } from './task.service'
 export class AppComponent {
   title = 'app works!';
   newTask: Task = new Task();
-  todos: Task[];
+  todos: Task[] = [];
 
-  constructor( private taskDataService: TaskService ) {
-    this.todos = [];
-  }
+  constructor( private taskService: TaskService ) { }
 
-  addTodo() {
-    this.taskDataService.addTask( this.newTask );
-    this.newTask = new Task();
+  addTodo(): void {
+
+    this.taskService.create(this.newTask)
+      .then(todo => {
+        this.todos.push(todo);
+        this.newTask = new Task();
+        this.getTasks();
+      });
+
   }
 
   toggleTodoComplete( todo ) {
@@ -31,7 +35,7 @@ export class AppComponent {
   }
 
   getTasks(): void {
-    this.taskDataService
+    this.taskService
         .getTasks()
         .then(todos => {
           this.todos = todos;
