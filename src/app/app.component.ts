@@ -26,12 +26,25 @@ export class AppComponent {
 
   }
 
-  toggleTodoComplete( todo ) {
+  toggleTodoComplete( todo: Task ): void {
     console.log('toggleTodoComplete');
+    this.taskService
+      .update( Object.assign(todo, { complete: !todo.complete }  ) )
+      .then( () => {
+        this.getTasks();
+      } );
+
   }
 
-  removeTodo( todo ) {
-    console.log('removeTodo');
+  removeTodo( todo: Task ): void {
+
+    this.taskService
+      .delete( todo.id )
+      .then( () => {
+        this.todos = this.todos.filter( h => h !== todo );
+        if ( this.newTask === todo )
+          this.newTask = null;
+      } );
   }
 
   getTasks(): void {

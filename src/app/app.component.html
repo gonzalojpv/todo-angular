@@ -10,10 +10,10 @@
       <div class="col-sm-12">
         <section class="main" *ngIf="todos.length > 0">
           <ul class="todo-list">
-            <li *ngFor="let todo of todos">
+            <li *ngFor="let todo of todos" [class.completed]="todo.complete">
               <div class="view">
-
-                <label>{{todo.title}}</label>
+                <input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete" id="check-{{todo.title}}">
+                <label for="check-{{todo.title}}">{{todo.title}}</label>
                 <button class="destroy" (click)="removeTodo(todo)"></button>
               </div>
             </li>
@@ -23,10 +23,12 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <app-site-footer></app-site-footer>
-        <div *ngIf="todos.length > 0">
-          <span class="todo-count"><strong>{{todos.length}}</strong> {{todos.length == 1 ? 'item' : 'items'}} left</span>
-        </div>
+        <footer class="footer">
+          <div *ngIf="todos.length > 0">
+            <app-site-footer></app-site-footer>
+            <span class="todo-count"><strong>{{todos.length}}</strong> {{todos.length == 1 ? 'item' : 'items'}} left</span>
+          </div>
+        </footer>
       </div>
     </div>
   </section>
