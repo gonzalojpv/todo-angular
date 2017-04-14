@@ -26,13 +26,18 @@ export class AppComponent {
 
   }
 
-  toggleTodoComplete() {
+  toggleTodoComplete( todo: Task ): void {
     console.log('toggleTodoComplete');
+    this.taskService
+      .update( Object.assign(todo, { complete: !todo.complete }  ) )
+      .then( () => {
+        this.getTasks();
+      } );
 
   }
 
   removeTodo( todo: Task ): void {
-    console.log('removeTodo');
+
     this.taskService
       .delete( todo.id )
       .then( () => {

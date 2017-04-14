@@ -154,6 +154,7 @@ label[for='toggle-all'] {
 }
 
 .todo-list li .toggle {
+	-moz-appearance: checkbox !important;
 	text-align: center;
 	width: 40px;
 	/* auto, since non-WebKit browsers doesn't support input styling */
