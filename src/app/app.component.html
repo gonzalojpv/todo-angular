@@ -23,10 +23,12 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <app-site-footer></app-site-footer>
-        <div *ngIf="todos.length > 0">
-          <span class="todo-count"><strong>{{todos.length}}</strong> {{todos.length == 1 ? 'item' : 'items'}} left</span>
-        </div>
+        <footer class="footer">
+          <div *ngIf="todos.length > 0">
+            <app-site-footer></app-site-footer>
+            <span class="todo-count"><strong>{{todos.length}}</strong> {{todos.length == 1 ? 'item' : 'items'}} left</span>
+          </div>
+        </footer>
       </div>
     </div>
   </section>
