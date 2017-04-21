@@ -27,7 +27,6 @@ export class AppComponent {
   }
 
   toggleTodoComplete( todo: Task ): void {
-    console.log('toggleTodoComplete');
     this.taskService
       .update( Object.assign(todo, { complete: !todo.complete }  ) )
       .then( () => {
